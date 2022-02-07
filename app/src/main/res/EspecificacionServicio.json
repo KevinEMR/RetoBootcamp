@@ -1,0 +1,320 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Services specification.",
+    "version": "1.0.0",
+    "title": "Challenge"
+  },
+  "tags": [
+    {
+      "name": "RS_Usuarios",
+      "description": "Operations about users"
+    },
+    {
+      "name": "RS_Documentos",
+      "description": "Operations about documents"
+    },
+    {
+      "name": "RS_Oficinas",
+      "description": "Operations about offices"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/RS_Usuarios": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Finds user by IdUsuario and Clave",
+        "description": "",
+        "operationId": "getUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "idUsuario",
+            "in": "query",
+            "description": "Needed to filter user information",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clave",
+            "in": "query",
+            "description": "Needed to filter user information",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+			"description": "Operacion correcta",
+            "schema": {
+              "$ref": "#/definitions/Users"
+            }
+          },
+          "400": {
+            "description": "Parametros no validos"
+          }
+        }
+      }
+    },
+    "/RS_Oficinas": {
+      "get": {
+        "tags": [
+          "Oficinas"
+        ],
+        "summary": "Finds offices by city",
+        "description": "",
+        "operationId": "getOffices",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ciudad",
+            "in": "query",
+            "description": "Needed to filter office information",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+			"description": "Operación correcta",
+            "schema": {
+              "$ref": "#/definitions/Offices"
+            }
+          }
+        }
+      }
+    },
+    "/RS_Documentos": {
+      "get": {
+        "tags": [
+          "Documentos"
+        ],
+        "summary": "Finds documents by 'idRegistro' or 'correo'",
+        "description": "",
+        "operationId": "getDocuments",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "idRegistro",
+            "in": "query",
+            "description": "Needed to filter document information. This has priority over correo. With this filter is showen the field Adjunto",
+            "required": false,
+            "type": "string"
+          },
+		  {
+            "name": "correo",
+            "in": "query",
+            "description": "Needed to filter document information",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+			"description": "Operación correcta",
+            "schema": {
+              "$ref": "#/definitions/Documents"
+            }
+          },
+          "400": {
+            "description": "Consulta no permitida"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Documentos"
+        ],
+        "summary": "Puts a document",
+        "description": "",
+        "operationId": "putDocument",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/NewDocument"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+			"description": "Operación correcta",
+            "schema": {
+              "$ref": "#/definitions/Put"
+            }
+          },
+          "400": {
+            "description": "Faltan parametros o se encuentran vacios"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+	  "Users": {
+		"type": "object",
+		"properties": {
+			"id": {
+			  "type": "string"
+			},
+			"nombre": {
+			  "type": "string"
+			},
+			"apellido": {
+			  "type": "string"
+			},
+			"acceso": {
+			  "type": "boolean"
+			},
+			"admin": {
+			  "type": "boolean"
+			}
+		}
+	  },
+	  "Office": {
+		"type": "object",
+		"properties": {
+			"IdOficina": {
+			  "type": "integer"
+			},
+			"Nombre": {
+			  "type": "string"
+			},
+			"Ciudad": {
+			  "type": "string"
+			},
+			"Longitud": {
+			  "type": "string"
+			},
+			"Latitud": {
+			  "type": "string"
+			}
+		}
+	  },
+	  "Offices": {
+		"type": "object",
+		"properties": {
+			"Items": {
+			  "type": "array",
+			  "items": {
+                "$ref": "#/definitions/Office"
+              }
+			},
+			"Count": {
+			  "type": "integer"
+			},
+			"ScannedCount": {
+			  "type": "integer"
+			}
+		}
+	  },
+	  "Document": {
+		"type": "object",
+		"properties": {
+			"IdRegistro": {
+			  "type": "string"
+			},
+			"Fecha": {
+			  "type": "string"
+			},
+			"TipoId": {
+			  "type": "string"
+			},
+			"Identificacion": {
+			  "type": "string"
+			},
+			"Nombre": {
+			  "type": "string"
+			},
+			"Apellido": {
+			  "type": "string"
+			},
+			"Ciudad": {
+			  "type": "string"
+			},
+			"Correo": {
+			  "type": "string"
+			},
+			"TipoAdjunto": {
+			  "type": "string"
+			},
+			"Adjunto": {
+			  "type": "string"
+			}			
+		}
+	  },
+	  "NewDocument": {
+		"type": "object",
+		"properties": {
+			"TipoId": {
+			  "type": "string"
+			},
+			"Identificacion": {
+			  "type": "string"
+			},
+			"Nombre": {
+			  "type": "string"
+			},
+			"Apellido": {
+			  "type": "string"
+			},
+			"Ciudad": {
+			  "type": "string"
+			},
+			"Correo": {
+			  "type": "string"
+			},
+			"TipoAdjunto": {
+			  "type": "string"
+			},
+			"Adjunto": {
+			  "type": "string"
+			}			
+		}
+	  },
+	  "Documents": {
+		"type": "object",
+		"properties": {
+			"Items": {
+			  "type": "array",
+			  "items": {
+                "$ref": "#/definitions/Document"
+              }
+			},
+			"Count": {
+			  "type": "integer"
+			},
+			"ScannedCount": {
+			  "type": "integer"
+			}
+		}
+	  },
+	  "Put": {
+		"type": "object",
+		"properties": {
+			"put": {
+			  "type": "boolean"
+			}
+		}
+	  }
+    }
+}

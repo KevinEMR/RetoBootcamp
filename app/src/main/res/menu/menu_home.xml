@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_enviar"
+        android:icon="@drawable/ic_baseline_description_24"
+        android:title="@string/enviar_documentos" />
+    <item
+        android:id="@+id/menu_ver"
+        android:icon="@drawable/ic_baseline_find_in_page_24"
+        android:title="@string/ver_documentos" />
+    <item
+        android:id="@+id/menu_oficianas"
+        android:icon="@drawable/ic_baseline_location_on_24"
+        android:title="@string/oficinas"/>
+    <item
+        android:id="@+id/menu_salir"
+        android:title="@string/cerrar_sesion" />
+</menu>

@@ -1,0 +1,48 @@
+import io.swagger.codegen.config.CodegenConfigurator
+import io.swagger.codegen.DefaultGenerator
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:7.0.4"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
+        classpath('io.swagger:swagger-codegen:2.4.12')
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+allprojects {
+    repositories {
+        maven { url "https://www.jitpack.io" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+def swaggerSourceFile = 'app/src/main/res/EspecificacionServicio.json'
+def swaggerTargetFolder = 'app/src/main/java/com/example/retobootcamp/services'
+
+task generateApi {
+    doLast {
+        def config = new CodegenConfigurator()
+        config.setInputSpec("file:///$projectDir/$swaggerSourceFile")
+        config.setOutputDir("$projectDir")
+        config.setLang('kotlin')
+        config.setAdditionalProperties([
+                'interfaceOnly' : 'true',
+                'apiPackage'    : 'api',
+                'modelPackage'  : 'model',
+                'sourceFolder'  : swaggerTargetFolder
+        ])
+        new DefaultGenerator().opts(config.toClientOptInput()).generate()
+    }
+}
+
+
+

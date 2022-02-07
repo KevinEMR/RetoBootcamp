@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Reto Bootcamp</string>
+    <string name="email">Correo Electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Ingresar</string>
+    <string name="loginwithfingerprint">Ingresar con Huella</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="enviar_documentos">Enviar Documentos</string>
+    <string name="sophos_solutions">Sophos Solutions</string>
+    <string name="ingresa_tus_datos_para_acceder">Ingresa tus datos para acceder.</string>
+    <string name="ver_documentos">Ver Documentos</string>
+    <string name="oficinas">Oficinas</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
+    <string name="selected_item">Item Selecionado</string>
+    <string name="cambiar">Cambiar</string>
+</resources>
